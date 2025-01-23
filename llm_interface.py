@@ -3,7 +3,7 @@
 import os
 import openai
 
-class OpenAIClient:
+class LLMClient:
     _instance = None
     _model = "gpt-4o-mini"
 
@@ -58,7 +58,7 @@ class OpenAIClient:
 
 
 def main():
-    client = OpenAIClient()
+    client = LLMClient()
     messages = [
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": "What mountain is the highest in the world?"}
