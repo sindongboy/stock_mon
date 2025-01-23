@@ -9,7 +9,7 @@
 import re
 import requests
 from bs4 import BeautifulSoup
-from get_summary_w_llm import OpenAIClient
+from llm_interface import OpenAIClient
 
 
 def get_top_10_news_url():
@@ -101,6 +101,7 @@ if __name__ == "__main__":
             print(title+ '\n')
             print(body + '\n\n')
             print("Summary: " + llm_client.get_summary(body) + '\n\n')
+            print("Opinion: " + llm_client.invest_opinions(body) + '\n\n')
             break
     else:
         print("No news found.")

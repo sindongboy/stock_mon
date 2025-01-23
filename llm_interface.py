@@ -29,13 +29,33 @@ class OpenAIClient:
         try:
             response = openai.chat.completions.create(
                 model=self._model,
-                messages=[{"role": "system", "content": "You are an AI Agent that Summarize given news article."},
+                messages=[{"role": "system", "content": "You are an AI Agent\
+                        that Summarize given news article. and give top 5 \
+                        important keywords with array format at the last sentence. when give keywords array, \
+                        only give keywords array, no title or any other decorations"},
                         {"role": "user", "content": article}]
             )
             return response.choices[0].message.content
         except openai.OpenAIError as e:
             print(f"An error occurred: {e}")
             return None
+
+    def invest_opinions(self, article):
+        try:
+            response = openai.chat.completions.create(
+                    model=self._model,
+                    messages=[{"role": "system", "content": "You are an Stock Investment Expert\
+                            that give investment opinion based on the given articles. \
+                            and give '+' symbol if your opinion about the stock is positive, \
+                            '-' otherwise at the last sentence\
+                            and also include your confidence level about your opinion from 1 to 10 scale at the last sentence. "},
+                            {"role": "user", "content": article}]
+                )
+            return response.choices[0].message.content
+        except openai.OpenAIError as e:
+            print(f"An error occurred: {e}")
+            return None
+
 
 def main():
     client = OpenAIClient()
